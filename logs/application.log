@@ -1,13 +1,13 @@
-2015-07-15 12:35:33,979 - [INFO] - from play in main 
+2015-07-16 01:27:44,271 - [INFO] - from play in main 
 Listening for HTTP on port 9000...
 
-2015-07-15 12:35:59,396 - [INFO] - from play in play-akka.actor.default-dispatcher-2 
+2015-07-16 01:28:35,370 - [INFO] - from play in play-akka.actor.default-dispatcher-1 
 database [default] connected at jdbc:h2:mem:play
 
-2015-07-15 12:35:59,723 - [ERROR] - from application in New I/O server worker #1-1 
+2015-07-16 01:28:35,691 - [ERROR] - from application in New I/O server worker #1-1 
 
 
-! @6mnfg737e - Internal server error, for request [GET /] ->
+! @6mnjdh34i - Internal server error, for request [GET /] ->
 
 play.api.db.evolutions.InvalidDatabaseRevision: Database 'default' needs evolution! [An SQL script need to be run on your database.]
 	at play.api.db.evolutions.EvolutionsPlugin$$anonfun$onStart$1.apply(Evolutions.scala:424) ~[play_2.9.1.jar:2.0]
@@ -37,7 +37,7 @@ play.api.db.evolutions.InvalidDatabaseRevision: Database 'default' needs evoluti
 	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1495) ~[akka-actor.jar:2.0]
 	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[akka-actor.jar:2.0]
 
-2015-07-15 12:36:04,186 - [WARN] - from play in New I/O server worker #1-1 
+2015-07-16 01:33:15,243 - [WARN] - from play in New I/O server worker #1-2 
 Applying evolution script for database 'default':
 
 # --- Rev:1,Ups - c47bb94
@@ -174,9 +174,9 @@ insert into cat (id,name,gender,color,birth,race_id) values (  9,'Lucifer','Male
 insert into cat (id,name,gender,color,birth,race_id) values ( 10,'Petkele','Female','Pink','1992-02-02',1);
 
 
-2015-07-15 12:36:07,066 - [INFO] - from play in play-akka.actor.default-dispatcher-2 
+2015-07-16 01:33:18,024 - [INFO] - from play in play-akka.actor.default-dispatcher-1 
 database [default] connected at jdbc:h2:mem:play
 
-2015-07-15 12:36:07,244 - [INFO] - from play in play-akka.actor.default-dispatcher-2 
+2015-07-16 01:33:18,166 - [INFO] - from play in play-akka.actor.default-dispatcher-1 
 Application started (Dev)
 

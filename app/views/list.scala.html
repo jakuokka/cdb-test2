@@ -62,13 +62,13 @@
                     case (cat, race) => {
                         <tr>
                           <td>
-			    <a href="@routes.Application.edit(cat.id.get)">@cat.name</a>
+			    <a href="@routes.Application.edit(cat.id.get,cat.name)">@cat.name</a>
 			  </td>
                           <td>
-			    <a href="@routes.Application.edit(cat.id.get)">@cat.gender</a>
+			    <a href="@routes.Application.edit(cat.id.get,cat.name)">@cat.gender</a>
                           </td>
 			   <td>
-			    <a href="@routes.Application.edit(cat.id.get)">@cat.color</a>
+			    <a href="@routes.Application.edit(cat.id.get,cat.name)">@cat.color</a>
                           </td>
                           <td>
                                @cat.birth.map(_.format("dd MMM yyyy")).getOrElse { <em>-</em> }

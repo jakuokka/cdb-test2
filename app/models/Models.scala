@@ -55,7 +55,16 @@ object Cat {
       SQL("select * from cat where id = {id}").on('id -> id).as(Cat.simple.singleOpt)
     }
   }
+
+  def findnameById(id: Long): Option[Cat] = {
+    DB.withConnection { implicit connection =>
+      SQL("select * from cat.name where id = {id}").on('id -> id).as(Cat.simple.singleOpt)
+    }
+  }
   
+
+
+
   /**
    * Return a page of (Cat,Race).
    *

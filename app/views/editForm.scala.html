@@ -1,4 +1,4 @@
-@(id: Long, catForm: Form[Cat])
+@(id: Long,name:String ,catForm: Form[Cat])
 
 @import helper._
 
@@ -8,7 +8,7 @@
     
     <h1>Edit cat</h1>
     
-    @form(routes.Application.update(id),'enctype -> "multipart/form-data") {
+    @form(routes.Application.update(id,name),'enctype -> "multipart/form-data") {
         
         <fieldset>
         
@@ -41,7 +41,7 @@
 	}
 	
      
-   <a href="@routes.Application.delete(id)" 
+   <a href="@routes.Application.delete(id,name)" 
    class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete this cat</a>
 	
 	

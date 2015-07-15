@@ -66,10 +66,18 @@ object Application extends Controller {
   }
 }
 
+/* Pick a picture from public/images   */
 
 def pickPict(name: String) = Action {
 def path = "public/images/" + name + ".jpg"
 Ok.sendFile(new java.io.File(path))
+}
+
+/* Delete a picture from public/images */
+
+def deletePict(name: String){
+val file: File = new File("public/images/" + name + ".jpg")
+file.delete()
 }
 
 
@@ -97,9 +105,9 @@ Ok.sendFile(new java.io.File(path))
    *
    * @param id Id of the cat to edit
    */
-  def edit(id: Long) = Action {
+  def edit(id: Long,name:String) = Action {
     Cat.findById(id).map { cat =>
-      Ok(html.editForm(id,catForm.fill(cat)))
+      Ok(html.editForm(id,name,catForm.fill(cat)))
     }.getOrElse(NotFound)
   }
   
@@ -108,9 +116,9 @@ Ok.sendFile(new java.io.File(path))
    *
    * @param id Id of the cat to edit
    */
-  def update(id: Long) = Action { implicit request =>
+  def update(id: Long,name:String) = Action { implicit request =>
     catForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.editForm(id, formWithErrors)),
+      formWithErrors => BadRequest(html.editForm(id,name,formWithErrors)),
       cat => {
         Cat.update(id, cat)
         Home.flashing("success" -> "Cat %s has been updated".format(cat.name))
@@ -139,10 +147,11 @@ Ok.sendFile(new java.io.File(path))
   }
   
   /**
-   * Handle cat deletion.
+   * Handle cat delete, the entry and the corresponding picture.
    */
-    def delete(id: Long) = Action {
+  def delete(id: Long,name:String) = Action {
     Cat.delete(id)
+    deletePict(name)
     Home.flashing("success" -> "Cat has been deleted")
   }
 
