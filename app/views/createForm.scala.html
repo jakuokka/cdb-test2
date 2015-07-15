@@ -1,0 +1,44 @@
+@(catForm: Form[Cat])
+
+
+@import helper._
+
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.f) } 
+
+@main {
+    
+    <h1>Add a cat</h1>
+    
+    @form(routes.Application.save,'enctype -> "multipart/form-data") {
+        
+        <fieldset>
+        
+            @inputText(catForm("name"), '_label -> "Name")
+            @select(
+                catForm("gender"), 
+                options = options(Genders.list),
+                '_default -> "--- Choose a Gender ---",
+                '_label -> "Gender"
+            )
+            
+    
+	    @inputText(catForm("color"), '_label -> "Color")
+            @inputText(catForm("birth"), '_label -> "Birthdate")
+
+            @select(
+                catForm("race"), 
+                Race.options, 
+                '_label -> "Breed", '_default -> "-- Choose a breed --",
+                '_showConstraints -> false
+            )
+            
+        </fieldset>
+        
+        <div class="actions">
+            <input type="submit" value="Create this entry" class="btn primary"> or 
+            <a href="@routes.Application.list()" class="btn">Cancel</a> 
+        </div>
+        
+    }
+    
+}
