@@ -27,7 +27,7 @@ object Cat {
   /**
    * Parse a Cat from a ResultSet
    */
-  val simple = {
+    val simple = {
     get[Pk[Long]]("cat.id") ~
     get[String]("cat.name") ~
     get[String]("cat.gender") ~
@@ -37,7 +37,7 @@ object Cat {
       case id~name~gender~color~birth~raceId => Cat(id, name, gender,color, birth, raceId)
     }
   }
-  
+
   /**
    * Parse a (Cat,Race) from a ResultSet
    */
@@ -55,15 +55,6 @@ object Cat {
       SQL("select * from cat where id = {id}").on('id -> id).as(Cat.simple.singleOpt)
     }
   }
-
-  def findnameById(id: Long): Option[Cat] = {
-    DB.withConnection { implicit connection =>
-      SQL("select * from cat.name where id = {id}").on('id -> id).as(Cat.simple.singleOpt)
-    }
-  }
-  
-
-
 
   /**
    * Return a page of (Cat,Race).
@@ -164,7 +155,7 @@ object Cat {
    *
    * @param id Id of the cat to delete.
    */
-  def delete(id: Long) = {
+    def delete(id: Long) = {
     DB.withConnection { implicit connection =>
       SQL("delete from cat where id = {id}").on('id -> id).executeUpdate()
     }

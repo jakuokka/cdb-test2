@@ -1,6 +1,6 @@
 // @SOURCE:/home/jakuokka/java/play-2.0/test/conf/routes
-// @HASH:88482c0fe9ca0e41f28f34c2e3040bbc099be7ef
-// @DATE:Thu Jul 16 01:14:53 EEST 2015
+// @HASH:1371d9f008c3508f402927dc3f6269c1ea6b6c30
+// @DATE:Fri Jul 17 02:19:29 EEST 2015
 
 import play.core._
 import play.core.Router._
@@ -53,9 +53,17 @@ def list(p:Int = 0, s:Int = 2, f:String = "") = {
 }
                                                         
  
-// @LINE:16
-def edit(id:Long, name:String) = {
-   Call("GET", "/cats/" + implicitly[PathBindable[Long]].unbind("id", id) + queryString(List(Some(implicitly[QueryStringBindable[String]].unbind("name", name)))))
+// @LINE:21
+// @LINE:20
+def delete(id:Long) = {
+   (id) match {
+// @LINE:20
+case (id) if true => Call("GET", "/cats/" + implicitly[PathBindable[Long]].unbind("id", id) + "/delete")
+                                                                
+// @LINE:21
+case (id) if true => Call("POST", "/cats/" + implicitly[PathBindable[Long]].unbind("id", id) + "/delete")
+                                                                    
+   }
 }
                                                         
  
@@ -65,15 +73,15 @@ def pickPict(name:String) = {
 }
                                                         
  
-// @LINE:17
-def update(id:Long, name:String) = {
-   Call("POST", "/cats/" + implicitly[PathBindable[Long]].unbind("id", id) + queryString(List(Some(implicitly[QueryStringBindable[String]].unbind("name", name)))))
-}
-                                                        
- 
 // @LINE:12
 def create() = {
    Call("GET", "/cats/new")
+}
+                                                        
+ 
+// @LINE:17
+def update(id:Long) = {
+   Call("POST", "/cats/" + implicitly[PathBindable[Long]].unbind("id", id))
 }
                                                         
  
@@ -89,17 +97,9 @@ def index() = {
 }
                                                         
  
-// @LINE:21
-// @LINE:20
-def delete(id:Long, name:String) = {
-   (id, name) match {
-// @LINE:20
-case (id, name) if true => Call("GET", "/cats/" + implicitly[PathBindable[Long]].unbind("id", id) + "/delete" + queryString(List(Some(implicitly[QueryStringBindable[String]].unbind("name", name)))))
-                                                                
-// @LINE:21
-case (id, name) if true => Call("POST", "/cats/" + implicitly[PathBindable[Long]].unbind("id", id) + "/delete" + queryString(List(Some(implicitly[QueryStringBindable[String]].unbind("name", name)))))
-                                                                    
-   }
+// @LINE:16
+def edit(id:Long) = {
+   Call("GET", "/cats/" + implicitly[PathBindable[Long]].unbind("id", id))
 }
                                                         
 
@@ -188,12 +188,18 @@ def list = JavascriptReverseRoute(
 )
                                                         
  
-// @LINE:16
-def edit = JavascriptReverseRoute(
-   "controllers.Application.edit",
+// @LINE:21
+// @LINE:20
+def delete = JavascriptReverseRoute(
+   "controllers.Application.delete",
    """
-      function(id,name) {
-      return _wA({method:"GET", url:"/cats/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("id", id) + _qS([(""" + implicitly[QueryStringBindable[String]].javascriptUnbind + """)("name", name)])})
+      function(id) {
+      if (true) {
+      return _wA({method:"GET", url:"/cats/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("id", id) + "/delete"})
+      }
+      if (true) {
+      return _wA({method:"POST", url:"/cats/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("id", id) + "/delete"})
+      }
       }
    """
 )
@@ -210,23 +216,23 @@ def pickPict = JavascriptReverseRoute(
 )
                                                         
  
-// @LINE:17
-def update = JavascriptReverseRoute(
-   "controllers.Application.update",
-   """
-      function(id,name) {
-      return _wA({method:"POST", url:"/cats/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("id", id) + _qS([(""" + implicitly[QueryStringBindable[String]].javascriptUnbind + """)("name", name)])})
-      }
-   """
-)
-                                                        
- 
 // @LINE:12
 def create = JavascriptReverseRoute(
    "controllers.Application.create",
    """
       function() {
       return _wA({method:"GET", url:"/cats/new"})
+      }
+   """
+)
+                                                        
+ 
+// @LINE:17
+def update = JavascriptReverseRoute(
+   "controllers.Application.update",
+   """
+      function(id) {
+      return _wA({method:"POST", url:"/cats/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("id", id)})
       }
    """
 )
@@ -254,18 +260,12 @@ def index = JavascriptReverseRoute(
 )
                                                         
  
-// @LINE:21
-// @LINE:20
-def delete = JavascriptReverseRoute(
-   "controllers.Application.delete",
+// @LINE:16
+def edit = JavascriptReverseRoute(
+   "controllers.Application.edit",
    """
-      function(id, name) {
-      if (true) {
-      return _wA({method:"GET", url:"/cats/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("id", id) + "/delete" + _qS([(""" + implicitly[QueryStringBindable[String]].javascriptUnbind + """)("name", name)])})
-      }
-      if (true) {
-      return _wA({method:"POST", url:"/cats/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("id", id) + "/delete" + _qS([(""" + implicitly[QueryStringBindable[String]].javascriptUnbind + """)("name", name)])})
-      }
+      function(id) {
+      return _wA({method:"GET", url:"/cats/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("id", id)})
       }
    """
 )
@@ -349,9 +349,9 @@ def list(p:Int, s:Int, f:String) = new play.api.mvc.HandlerRef(
 )
                               
  
-// @LINE:16
-def edit(id:Long, name:String) = new play.api.mvc.HandlerRef(
-   controllers.Application.edit(id, name), HandlerDef(this, "controllers.Application", "edit", Seq(classOf[Long], classOf[String]))
+// @LINE:20
+def delete(id:Long) = new play.api.mvc.HandlerRef(
+   controllers.Application.delete(id), HandlerDef(this, "controllers.Application", "delete", Seq(classOf[Long]))
 )
                               
  
@@ -361,15 +361,15 @@ def pickPict(name:String) = new play.api.mvc.HandlerRef(
 )
                               
  
-// @LINE:17
-def update(id:Long, name:String) = new play.api.mvc.HandlerRef(
-   controllers.Application.update(id, name), HandlerDef(this, "controllers.Application", "update", Seq(classOf[Long], classOf[String]))
-)
-                              
- 
 // @LINE:12
 def create() = new play.api.mvc.HandlerRef(
    controllers.Application.create(), HandlerDef(this, "controllers.Application", "create", Seq())
+)
+                              
+ 
+// @LINE:17
+def update(id:Long) = new play.api.mvc.HandlerRef(
+   controllers.Application.update(id), HandlerDef(this, "controllers.Application", "update", Seq(classOf[Long]))
 )
                               
  
@@ -385,9 +385,9 @@ def index() = new play.api.mvc.HandlerRef(
 )
                               
  
-// @LINE:20
-def delete(id:Long, name:String) = new play.api.mvc.HandlerRef(
-   controllers.Application.delete(id, name), HandlerDef(this, "controllers.Application", "delete", Seq(classOf[Long], classOf[String]))
+// @LINE:16
+def edit(id:Long) = new play.api.mvc.HandlerRef(
+   controllers.Application.edit(id), HandlerDef(this, "controllers.Application", "edit", Seq(classOf[Long]))
 )
                               
 

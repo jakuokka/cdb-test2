@@ -1,4 +1,4 @@
-@(id: Long,name:String ,catForm: Form[Cat])
+@(id: Long,catForm: Form[Cat])
 
 @import helper._
 
@@ -8,10 +8,11 @@
     
     <h1>Edit cat</h1>
     
-    @form(routes.Application.update(id,name),'enctype -> "multipart/form-data") {
+    @form(routes.Application.update(id),'enctype -> "multipart/form-data") {
         
         <fieldset>
-        
+
+	 
           @inputText(catForm("name"), '_label -> "Cat's name")
 	  @select(
                 catForm("gender"), 
@@ -34,14 +35,14 @@
         </fieldset>
         
         <div class="actions">
-            <input type="submit" value="Save this cat" class="btn primary"> or 
+             <input type="submit" value="Save this cat" class="btn primary"> or 
             <a href="@routes.Application.list()" class="btn">Cancel</a> 
         </div>
 
 	}
 	
      
-   <a href="@routes.Application.delete(id,name)" 
+   <a href="@routes.Application.delete(id)" 
    class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete this cat</a>
 	
 	

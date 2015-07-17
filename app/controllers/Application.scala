@@ -49,7 +49,7 @@ object Application extends Controller {
 
   // -- Actions
 
-/** 
+ /** 
  * Handle file upload 
  */
   def upload(name: String) = Action(parse.multipartFormData) { request =>
@@ -101,13 +101,13 @@ file.delete()
   }
   
   /**
-   * Display the 'edit form' of a existing Cat.
+   * Display the 'edit form' of an existing Cat.
    *
    * @param id Id of the cat to edit
    */
-  def edit(id: Long,name:String) = Action {
+  def edit(id: Long) = Action {
     Cat.findById(id).map { cat =>
-      Ok(html.editForm(id,name,catForm.fill(cat)))
+    Ok(html.editForm(id,catForm.fill(cat)))
     }.getOrElse(NotFound)
   }
   
@@ -116,11 +116,13 @@ file.delete()
    *
    * @param id Id of the cat to edit
    */
-  def update(id: Long,name:String) = Action { implicit request =>
-    catForm.bindFromRequest.fold(
-      formWithErrors => BadRequest(html.editForm(id,name,formWithErrors)),
-      cat => {
+  def update(id: Long) = Action { implicit request =>
+      catForm.bindFromRequest.fold(
+      formWithErrors =>
+      BadRequest(html.editForm(id,formWithErrors)),
+        cat => {
         Cat.update(id, cat)
+
         Home.flashing("success" -> "Cat %s has been updated".format(cat.name))
       }
     )
@@ -146,14 +148,14 @@ file.delete()
     )
   }
   
-  /**
-   * Handle cat delete, the entry and the corresponding picture.
+   /**
+   * Handle cat delete.
    */
-  def delete(id: Long,name:String) = Action {
-    Cat.delete(id)
-    deletePict(name)
-    Home.flashing("success" -> "Cat has been deleted")
-  }
-
+   def delete(id: Long) = Action {
+   Cat.findById(id).map { cat =>
+   deletePict(cat.name)
+   }.getOrElse(NotFound)
+   Cat.delete(id)
+   Home.flashing("success" -> "Cat has been deleted")
+   }
 }
-            
