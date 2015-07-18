@@ -1,6 +1,6 @@
 // @SOURCE:/home/jakuokka/java/play-2.0/test/conf/routes
-// @HASH:1371d9f008c3508f402927dc3f6269c1ea6b6c30
-// @DATE:Fri Jul 17 02:19:29 EEST 2015
+// @HASH:64d5b95b4ab0b5553c2e4b696305c6c35f4cda74
+// @DATE:Sat Jul 18 20:28:46 EEST 2015
 
 import play.core._
 import play.core.Router._
@@ -61,7 +61,7 @@ val controllers_Application_upload10 = Route("POST", PathPattern(List(StaticPart
 // @LINE:31
 val controllers_Application_pickPict11 = Route("GET", PathPattern(List(StaticPart("/picture/"),DynamicPart("name", """[^/]+"""))))
                     
-def documentation = List(("""GET""","""/""","""controllers.Application.index"""),("""GET""","""/cats""","""controllers.Application.list(p:Int ?= 0, s:Int ?= 2, f:String ?= "")"""),("""GET""","""/cats/new""","""controllers.Application.create"""),("""POST""","""/cats""","""controllers.Application.save"""),("""GET""","""/cats/$id<[^/]+>""","""controllers.Application.edit(id:Long)"""),("""POST""","""/cats/$id<[^/]+>""","""controllers.Application.update(id:Long)"""),("""GET""","""/cats/$id<[^/]+>/delete""","""controllers.Application.delete(id:Long)"""),("""POST""","""/cats/$id<[^/]+>/delete""","""controllers.Application.delete(id:Long)"""),("""GET""","""/assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""POST""","""/assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""POST""","""/""","""controllers.Application.upload(name:String)"""),("""GET""","""/picture/$name<[^/]+>""","""controllers.Application.pickPict(name:String)"""))
+def documentation = List(("""GET""","""/""","""controllers.Application.index"""),("""GET""","""/cats""","""controllers.Application.list(p:Int ?= 0, s:Int ?= 2, f:String ?= "")"""),("""GET""","""/cats/new""","""controllers.Application.create"""),("""POST""","""/cats""","""controllers.Application.save"""),("""GET""","""/cats/$id<[^/]+>""","""controllers.Application.edit(id:Long)"""),("""POST""","""/cats/$id<[^/]+>""","""controllers.Application.update(id:Long)"""),("""GET""","""/cats/$id<[^/]+>/delete""","""controllers.Application.delete(id:Long)"""),("""POST""","""/cats/$id<[^/]+>/delete""","""controllers.Application.delete(id:Long)"""),("""GET""","""/assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""POST""","""/assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""POST""","""/""","""controllers.Application.upload(name:String, cattag:Long)"""),("""GET""","""/picture/$name<[^/]+>""","""controllers.Application.pickPict(name:String, cattag:Long)"""))
              
     
 def routes:PartialFunction[RequestHeader,Handler] = {        
@@ -148,16 +148,16 @@ case controllers_Assets_at9(params) => {
 
 // @LINE:30
 case controllers_Application_upload10(params) => {
-   call(params.fromQuery[String]("name", None)) { (name) =>
-        invokeHandler(_root_.controllers.Application.upload(name), HandlerDef(this, "controllers.Application", "upload", Seq(classOf[String])))
+   call(params.fromQuery[String]("name", None), params.fromQuery[Long]("cattag", None)) { (name, cattag) =>
+        invokeHandler(_root_.controllers.Application.upload(name, cattag), HandlerDef(this, "controllers.Application", "upload", Seq(classOf[String], classOf[Long])))
    }
 }
                     
 
 // @LINE:31
 case controllers_Application_pickPict11(params) => {
-   call(params.fromPath[String]("name", None)) { (name) =>
-        invokeHandler(_root_.controllers.Application.pickPict(name), HandlerDef(this, "controllers.Application", "pickPict", Seq(classOf[String])))
+   call(params.fromPath[String]("name", None), params.fromQuery[Long]("cattag", None)) { (name, cattag) =>
+        invokeHandler(_root_.controllers.Application.pickPict(name, cattag), HandlerDef(this, "controllers.Application", "pickPict", Seq(classOf[String], classOf[Long])))
    }
 }
                     

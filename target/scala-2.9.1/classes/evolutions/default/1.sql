@@ -17,6 +17,7 @@ create table cat (
   color                     varchar(255) not null,
   birth                     timestamp,
   race_id                   bigint,
+  cattag		    bigint,
   constraint pk_cat primary key (id))
 ;
 

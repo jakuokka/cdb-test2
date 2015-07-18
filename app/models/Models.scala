@@ -10,7 +10,7 @@ import anorm._
 import anorm.SqlParser._
 
 case class Race(id: Pk[Long] = NotAssigned, name: String)
-case class Cat(id: Pk[Long] = NotAssigned, name: String, gender: String, color: String, birth: Option[Date], raceId: Option[Long])
+case class Cat(id: Pk[Long] = NotAssigned, name: String, gender: String, color: String, birth: Option[Date], raceId: Option[Long], cattag: Option[Long])
 
 /**
  * Helper for pagination.
@@ -33,8 +33,9 @@ object Cat {
     get[String]("cat.gender") ~
     get[String]("cat.color") ~
     get[Option[Date]]("cat.birth") ~
-    get[Option[Long]]("cat.race_id") map {
-      case id~name~gender~color~birth~raceId => Cat(id, name, gender,color, birth, raceId)
+    get[Option[Long]]("cat.race_id")~
+    get[Option[Long]]("cat.cattag")   map {
+      case id~name~gender~color~birth~raceId~cattag => Cat(id, name, gender,color, birth, raceId,cattag)
     }
   }
 
@@ -112,7 +113,7 @@ object Cat {
       SQL(
         """
           update cat
-          set name = {name}, gender = {gender},color={color}, birth = {birth}, race_id = {race_id}
+          set name = {name}, gender = {gender},color={color}, birth = {birth}, race_id = {race_id}, cattag ={cattag}
           where id = {id}
         """
       ).on(
@@ -121,7 +122,8 @@ object Cat {
         'gender -> cat.gender,
 	'color -> cat.color,
         'birth -> cat.birth,
-        'race_id -> cat.raceId
+        'race_id -> cat.raceId,
+	'cattag -> cat.cattag
       ).executeUpdate()
     }
   }
@@ -132,12 +134,12 @@ object Cat {
    * @param cat The cat values.
    */
   def insert(cat: Cat) = {
-    DB.withConnection { implicit connection =>
-      SQL(
+     DB.withConnection { implicit connection =>
+       SQL(
         """
           insert into cat values (
             (select next value for cat_seq), 
-            {name}, {gender},{color}, {birth}, {race_id}
+            {name}, {gender},{color}, {birth}, {race_id},{cattag}
           )
         """
       ).on(
@@ -145,7 +147,8 @@ object Cat {
         'gender -> cat.gender,
 	'color -> cat.color,
         'birth -> cat.birth,
-        'race_id -> cat.raceId
+        'race_id -> cat.raceId,
+	'cattag -> cat.cattag
       ).executeUpdate()
     }
   }

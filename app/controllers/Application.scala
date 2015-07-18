@@ -16,7 +16,7 @@ import play.api.data.Form
 import play.api.data.Forms._
 import play.api.libs.json.Json
 import java.io.ByteArrayInputStream
-
+import scala.util.Random
 
 
 
@@ -40,7 +40,8 @@ object Application extends Controller {
       "gender" -> nonEmptyText,
       "color" -> nonEmptyText,
       "birth" -> optional(date("yyyy-MM-dd")),
-      "race" -> optional(longNumber)
+      "race" -> optional(longNumber),
+      "cattag" -> optional(longNumber)
     )(Cat.apply)(Cat.unapply)
 
   
@@ -52,12 +53,12 @@ object Application extends Controller {
  /** 
  * Handle file upload 
  */
-  def upload(name: String) = Action(parse.multipartFormData) { request =>
+  def upload(name: String,cattag: Long) = Action(parse.multipartFormData) { request =>
   request.body.file("picture").map { picture =>
     import java.io.File
     val filename = picture.filename 
     val contentType = picture.contentType
-    picture.ref.moveTo(new File("public/images/" + name +".jpg"),true)
+    picture.ref.moveTo(new File("public/images/" + name + cattag + ".jpg"),true)
     Redirect(routes.Application.list(0, 2, ""))
   }.getOrElse {
     Redirect(routes.Application.list(0, 2, "")).flashing(
@@ -68,15 +69,15 @@ object Application extends Controller {
 
 /* Pick a picture from public/images   */
 
-def pickPict(name: String) = Action {
-def path = "public/images/" + name + ".jpg"
+def pickPict(name: String,cattag: Long) = Action {
+def path = "public/images/" + name + cattag + ".jpg"
 Ok.sendFile(new java.io.File(path))
 }
 
 /* Delete a picture from public/images */
 
-def deletePict(name: String){
-val file: File = new File("public/images/" + name + ".jpg")
+def deletePict(name: String,cattag: Long){
+val file: File = new File("public/images/" + name + cattag + ".jpg")
 file.delete()
 }
 
@@ -138,12 +139,12 @@ file.delete()
   /**
    * Handle the 'new cat form' submission.
    */
-  def save = Action { implicit request =>
-    catForm.bindFromRequest.fold(
+      def save = Action { implicit request =>
+      catForm.bindFromRequest.fold(
       formWithErrors => BadRequest(html.createForm(formWithErrors)),
       cat => {
-        Cat.insert(cat)
-        Home.flashing("success" -> "Cat %s has been created".format(cat.name))
+      Cat.insert(cat) 
+      Home.flashing("success" -> "Cat %s has been created".format(cat.name))
       }
     )
   }
@@ -153,9 +154,19 @@ file.delete()
    */
    def delete(id: Long) = Action {
    Cat.findById(id).map { cat =>
-   deletePict(cat.name)
+   deletePict(cat.name,cat.cattag.get)
    }.getOrElse(NotFound)
    Cat.delete(id)
    Home.flashing("success" -> "Cat has been deleted")
    }
+
+ 
+  def rndInt(n: Int): Long = {
+  val tagPict: Long  = Random.nextInt(n*1000000)
+  tagPict
+  }
+
+  
+  
+
 }

@@ -1,6 +1,6 @@
 // @SOURCE:/home/jakuokka/java/play-2.0/test/conf/routes
-// @HASH:1371d9f008c3508f402927dc3f6269c1ea6b6c30
-// @DATE:Fri Jul 17 02:19:29 EEST 2015
+// @HASH:64d5b95b4ab0b5553c2e4b696305c6c35f4cda74
+// @DATE:Sat Jul 18 20:28:46 EEST 2015
 
 import play.core._
 import play.core.Router._
@@ -41,9 +41,9 @@ class ReverseApplication {
 
 
  
-// @LINE:30
-def upload(name:String) = {
-   Call("POST", "/" + queryString(List(Some(implicitly[QueryStringBindable[String]].unbind("name", name)))))
+// @LINE:31
+def pickPict(name:String, cattag:Long) = {
+   Call("GET", "/picture/" + implicitly[PathBindable[String]].unbind("name", name) + queryString(List(Some(implicitly[QueryStringBindable[Long]].unbind("cattag", cattag)))))
 }
                                                         
  
@@ -64,12 +64,6 @@ case (id) if true => Call("GET", "/cats/" + implicitly[PathBindable[Long]].unbin
 case (id) if true => Call("POST", "/cats/" + implicitly[PathBindable[Long]].unbind("id", id) + "/delete")
                                                                     
    }
-}
-                                                        
- 
-// @LINE:31
-def pickPict(name:String) = {
-   Call("GET", "/picture/" + implicitly[PathBindable[String]].unbind("name", name))
 }
                                                         
  
@@ -100,6 +94,12 @@ def index() = {
 // @LINE:16
 def edit(id:Long) = {
    Call("GET", "/cats/" + implicitly[PathBindable[Long]].unbind("id", id))
+}
+                                                        
+ 
+// @LINE:30
+def upload(name:String, cattag:Long) = {
+   Call("POST", "/" + queryString(List(Some(implicitly[QueryStringBindable[String]].unbind("name", name)), Some(implicitly[QueryStringBindable[Long]].unbind("cattag", cattag)))))
 }
                                                         
 
@@ -166,12 +166,12 @@ class ReverseApplication {
 
 
  
-// @LINE:30
-def upload = JavascriptReverseRoute(
-   "controllers.Application.upload",
+// @LINE:31
+def pickPict = JavascriptReverseRoute(
+   "controllers.Application.pickPict",
    """
-      function(name) {
-      return _wA({method:"POST", url:"/" + _qS([(""" + implicitly[QueryStringBindable[String]].javascriptUnbind + """)("name", name)])})
+      function(name,cattag) {
+      return _wA({method:"GET", url:"/picture/" + (""" + implicitly[PathBindable[String]].javascriptUnbind + """)("name", name) + _qS([(""" + implicitly[QueryStringBindable[Long]].javascriptUnbind + """)("cattag", cattag)])})
       }
    """
 )
@@ -200,17 +200,6 @@ def delete = JavascriptReverseRoute(
       if (true) {
       return _wA({method:"POST", url:"/cats/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("id", id) + "/delete"})
       }
-      }
-   """
-)
-                                                        
- 
-// @LINE:31
-def pickPict = JavascriptReverseRoute(
-   "controllers.Application.pickPict",
-   """
-      function(name) {
-      return _wA({method:"GET", url:"/picture/" + (""" + implicitly[PathBindable[String]].javascriptUnbind + """)("name", name)})
       }
    """
 )
@@ -266,6 +255,17 @@ def edit = JavascriptReverseRoute(
    """
       function(id) {
       return _wA({method:"GET", url:"/cats/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("id", id)})
+      }
+   """
+)
+                                                        
+ 
+// @LINE:30
+def upload = JavascriptReverseRoute(
+   "controllers.Application.upload",
+   """
+      function(name,cattag) {
+      return _wA({method:"POST", url:"/" + _qS([(""" + implicitly[QueryStringBindable[String]].javascriptUnbind + """)("name", name), (""" + implicitly[QueryStringBindable[Long]].javascriptUnbind + """)("cattag", cattag)])})
       }
    """
 )
@@ -337,9 +337,9 @@ class ReverseApplication {
 
 
  
-// @LINE:30
-def upload(name:String) = new play.api.mvc.HandlerRef(
-   controllers.Application.upload(name), HandlerDef(this, "controllers.Application", "upload", Seq(classOf[String]))
+// @LINE:31
+def pickPict(name:String, cattag:Long) = new play.api.mvc.HandlerRef(
+   controllers.Application.pickPict(name, cattag), HandlerDef(this, "controllers.Application", "pickPict", Seq(classOf[String], classOf[Long]))
 )
                               
  
@@ -352,12 +352,6 @@ def list(p:Int, s:Int, f:String) = new play.api.mvc.HandlerRef(
 // @LINE:20
 def delete(id:Long) = new play.api.mvc.HandlerRef(
    controllers.Application.delete(id), HandlerDef(this, "controllers.Application", "delete", Seq(classOf[Long]))
-)
-                              
- 
-// @LINE:31
-def pickPict(name:String) = new play.api.mvc.HandlerRef(
-   controllers.Application.pickPict(name), HandlerDef(this, "controllers.Application", "pickPict", Seq(classOf[String]))
 )
                               
  
@@ -388,6 +382,12 @@ def index() = new play.api.mvc.HandlerRef(
 // @LINE:16
 def edit(id:Long) = new play.api.mvc.HandlerRef(
    controllers.Application.edit(id), HandlerDef(this, "controllers.Application", "edit", Seq(classOf[Long]))
+)
+                              
+ 
+// @LINE:30
+def upload(name:String, cattag:Long) = new play.api.mvc.HandlerRef(
+   controllers.Application.upload(name, cattag), HandlerDef(this, "controllers.Application", "upload", Seq(classOf[String], classOf[Long]))
 )
                               
 

@@ -97,16 +97,16 @@ insert into race (id,name) values ( 92,'Turkish Van');
 insert into race (id,name) values ( 93,'Ukrainian Levkoy');
 insert into race (id,name) values ( 94,'Klingon');
 
-insert into cat (id,name,gender,color,birth,race_id) values (  1,'Helkatti','Male','Pink','1991-01-01',1);
-insert into cat (id,name,gender,color,birth,race_id) values (  2,'Mirri','Male','Pink','1992-02-02',2);
-insert into cat (id,name,gender,color,birth,race_id) values (  3,'Miisu','Female','Pink','1992-02-02',2);
-insert into cat (id,name,gender,color,birth,race_id) values (  4,'Misse','Female','Pink','1992-02-02',2);
-insert into cat (id,name,gender,color,birth,race_id) values (  5,'Mauku','Male','Pink','1991-01-01',2);
-insert into cat (id,name,gender,color,birth,race_id) values (  6,'Miuku','Male','Pink','2006-01-10',1);
-insert into cat (id,name,gender,color,birth,race_id) values (  7,'Mouru','Male','Pink','1992-02-02',1);
-insert into cat (id,name,gender,color,birth,race_id) values (  8,'Satan','Male','Pink','1992-02-02',1);
-insert into cat (id,name,gender,color,birth,race_id) values (  9,'Lucifer','Male','Pink','1992-02-02',1);
-insert into cat (id,name,gender,color,birth,race_id) values ( 10,'Petkele','Female','Pink','1992-02-02',1);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values (  1,'Helkatti','Male','Pink','1991-01-01',1,111);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values (  2,'Mirri','Male','Pink','1992-02-02',2,222);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values (  3,'Miisu','Female','Pink','1992-02-02',2,333);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values (  4,'Misse','Female','Pink','1992-02-02',2,444);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values (  5,'Mauku','Male','Pink','1991-01-01',2,555);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values (  6,'Miuku','Male','Pink','2006-01-10',1,666);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values (  7,'Mouru','Male','Pink','1992-02-02',1,777);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values (  8,'Satan','Male','Pink','1992-02-02',1,888);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values (  9,'Lucifer','Male','Pink','1992-02-02',1,999);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values ( 10,'Petkele','Female','Pink','1992-02-02',30,101010);
 
 # --- !Downs
 

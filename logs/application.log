@@ -1,13 +1,13 @@
-2015-07-17 02:59:54,686 - [INFO] - from play in main 
+2015-07-18 23:37:20,508 - [INFO] - from play in main 
 Listening for HTTP on port 9000...
 
-2015-07-17 03:00:49,762 - [INFO] - from play in play-akka.actor.default-dispatcher-2 
+2015-07-18 23:37:50,334 - [INFO] - from play in play-akka.actor.default-dispatcher-2 
 database [default] connected at jdbc:h2:mem:play
 
-2015-07-17 03:00:50,085 - [ERROR] - from application in New I/O server worker #1-1 
+2015-07-18 23:37:50,658 - [ERROR] - from application in New I/O server worker #1-1 
 
 
-! @6mo16lf0b - Internal server error, for request [GET /] ->
+! @6moek9gg2 - Internal server error, for request [GET /] ->
 
 play.api.db.evolutions.InvalidDatabaseRevision: Database 'default' needs evolution! [An SQL script need to be run on your database.]
 	at play.api.db.evolutions.EvolutionsPlugin$$anonfun$onStart$1.apply(Evolutions.scala:424) ~[play_2.9.1.jar:2.0]
@@ -37,10 +37,10 @@ play.api.db.evolutions.InvalidDatabaseRevision: Database 'default' needs evoluti
 	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1495) ~[akka-actor.jar:2.0]
 	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[akka-actor.jar:2.0]
 
-2015-07-17 03:00:54,427 - [WARN] - from play in New I/O server worker #1-1 
+2015-07-18 23:37:55,685 - [WARN] - from play in New I/O server worker #1-1 
 Applying evolution script for database 'default':
 
-# --- Rev:1,Ups - c47bb94
+# --- Rev:1,Ups - dbd3e9f
 set ignorecase true;
 
 create table race (
@@ -56,6 +56,7 @@ gender                    varchar(255) not null,
 color                     varchar(255) not null,
 birth                     timestamp,
 race_id                   bigint,
+cattag		    bigint,
 constraint pk_cat primary key (id))
 ;
 
@@ -66,7 +67,7 @@ create sequence cat_seq start with 1000;
 alter table cat add constraint fk_cat_race_1 foreign key (race_id) references race (id) on delete restrict on update restrict;
 create index ix_cat_race_1 on cat (race_id);
 
-# --- Rev:2,Ups - 56e3a03
+# --- Rev:2,Ups - 32b645a
 insert into race (id,name) values ( 1,'Abyssinian');
 insert into race (id,name) values ( 2,'Aegean');
 insert into race (id,name) values ( 3,'American Curl');
@@ -162,21 +163,55 @@ insert into race (id,name) values ( 92,'Turkish Van');
 insert into race (id,name) values ( 93,'Ukrainian Levkoy');
 insert into race (id,name) values ( 94,'Klingon');
 
-insert into cat (id,name,gender,color,birth,race_id) values (  1,'Helkatti','Male','Pink','1991-01-01',1);
-insert into cat (id,name,gender,color,birth,race_id) values (  2,'Mirri','Male','Pink','1992-02-02',2);
-insert into cat (id,name,gender,color,birth,race_id) values (  3,'Miisu','Female','Pink','1992-02-02',2);
-insert into cat (id,name,gender,color,birth,race_id) values (  4,'Misse','Female','Pink','1992-02-02',2);
-insert into cat (id,name,gender,color,birth,race_id) values (  5,'Mauku','Male','Pink','1991-01-01',2);
-insert into cat (id,name,gender,color,birth,race_id) values (  6,'Miuku','Male','Pink','2006-01-10',1);
-insert into cat (id,name,gender,color,birth,race_id) values (  7,'Mouru','Male','Pink','1992-02-02',1);
-insert into cat (id,name,gender,color,birth,race_id) values (  8,'Satan','Male','Pink','1992-02-02',1);
-insert into cat (id,name,gender,color,birth,race_id) values (  9,'Lucifer','Male','Pink','1992-02-02',1);
-insert into cat (id,name,gender,color,birth,race_id) values ( 10,'Petkele','Female','Pink','1992-02-02',1);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values (  1,'Helkatti','Male','Pink','1991-01-01',1,111);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values (  2,'Mirri','Male','Pink','1992-02-02',2,222);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values (  3,'Miisu','Female','Pink','1992-02-02',2,333);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values (  4,'Misse','Female','Pink','1992-02-02',2,444);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values (  5,'Mauku','Male','Pink','1991-01-01',2,555);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values (  6,'Miuku','Male','Pink','2006-01-10',1,666);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values (  7,'Mouru','Male','Pink','1992-02-02',1,777);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values (  8,'Satan','Male','Pink','1992-02-02',1,888);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values (  9,'Lucifer','Male','Pink','1992-02-02',1,999);
+insert into cat (id,name,gender,color,birth,race_id,cattag) values ( 10,'Petkele','Female','Pink','1992-02-02',30,101010);
 
 
-2015-07-17 03:00:57,333 - [INFO] - from play in play-akka.actor.default-dispatcher-2 
+2015-07-18 23:37:58,294 - [INFO] - from play in play-akka.actor.default-dispatcher-2 
 database [default] connected at jdbc:h2:mem:play
 
-2015-07-17 03:00:57,419 - [INFO] - from play in play-akka.actor.default-dispatcher-2 
+2015-07-18 23:37:58,406 - [INFO] - from play in play-akka.actor.default-dispatcher-2 
 Application started (Dev)
+
+2015-07-18 23:38:36,839 - [ERROR] - from application in play-akka.actor.actions-dispatcher-10 
+
+
+! @6moek9gg3 - Internal server error, for request [GET /picture/Test?cattag=832109893] ->
+
+play.core.ActionInvoker$$anonfun$receive$1$$anon$1: Execution exception [[FileNotFoundException: public/images/Test832109893.jpg (No such file or directory)]]
+	at play.core.ActionInvoker$$anonfun$receive$1.apply(Invoker.scala:82) [play_2.9.1.jar:2.0]
+	at play.core.ActionInvoker$$anonfun$receive$1.apply(Invoker.scala:63) [play_2.9.1.jar:2.0]
+	at akka.actor.Actor$class.apply(Actor.scala:290) [akka-actor.jar:2.0]
+	at play.core.ActionInvoker.apply(Invoker.scala:61) [play_2.9.1.jar:2.0]
+	at akka.actor.ActorCell.invoke(ActorCell.scala:617) [akka-actor.jar:2.0]
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:179) [akka-actor.jar:2.0]
+	at akka.dispatch.Mailbox.run(Mailbox.scala:161) [akka-actor.jar:2.0]
+	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:505) [akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259) [akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:997) [akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1495) [akka-actor.jar:2.0]
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) [akka-actor.jar:2.0]
+Caused by: java.io.FileNotFoundException: public/images/Test832109893.jpg (No such file or directory)
+	at java.io.FileInputStream.open(Native Method) ~[na:1.7.0_60]
+	at java.io.FileInputStream.<init>(FileInputStream.java:146) ~[na:1.7.0_60]
+	at play.api.libs.iteratee.Enumerator$.fromFile(Iteratee.scala:981) ~[play_2.9.1.jar:2.0]
+	at play.api.mvc.Results$Status.sendFile(Results.scala:335) ~[play_2.9.1.jar:2.0]
+	at controllers.Application$$anonfun$pickPict$1.apply(Application.scala:74) ~[classes/:na]
+	at controllers.Application$$anonfun$pickPict$1.apply(Application.scala:72) ~[classes/:na]
+	at play.api.mvc.Action$$anonfun$apply$4.apply(Action.scala:204) ~[play_2.9.1.jar:2.0]
+	at play.api.mvc.Action$$anonfun$apply$4.apply(Action.scala:204) ~[play_2.9.1.jar:2.0]
+	at play.api.mvc.Action$$anon$1.apply(Action.scala:170) ~[play_2.9.1.jar:2.0]
+	at play.core.ActionInvoker$$anonfun$receive$1$$anonfun$4.apply(Invoker.scala:74) ~[play_2.9.1.jar:2.0]
+	at play.core.ActionInvoker$$anonfun$receive$1$$anonfun$4.apply(Invoker.scala:74) ~[play_2.9.1.jar:2.0]
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:17) ~[play_2.9.1.jar:2.0]
+	at play.core.ActionInvoker$$anonfun$receive$1.apply(Invoker.scala:73) [play_2.9.1.jar:2.0]
+	... 11 common frames omitted
 
