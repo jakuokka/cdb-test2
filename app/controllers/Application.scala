@@ -108,7 +108,7 @@ file.delete()
    */
   def edit(id: Long) = Action {
     Cat.findById(id).map { cat =>
-    Ok(html.editForm(id,catForm.fill(cat)))
+    Ok(html.editForm(id,cat.cattag.get,catForm.fill(cat)))
     }.getOrElse(NotFound)
   }
   
@@ -117,10 +117,10 @@ file.delete()
    *
    * @param id Id of the cat to edit
    */
-  def update(id: Long) = Action { implicit request =>
+  def update(id: Long,cattag: Long) = Action { implicit request =>
       catForm.bindFromRequest.fold(
       formWithErrors =>
-      BadRequest(html.editForm(id,formWithErrors)),
+      BadRequest(html.editForm(id,cattag,formWithErrors)),
         cat => {
         Cat.update(id, cat)
 

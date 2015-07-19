@@ -14,7 +14,7 @@ POST    /cats                  controllers.Application.save
 
 # Edit existing cat
 GET     /cats/:id              controllers.Application.edit(id:Long)
-POST    /cats/:id              controllers.Application.update(id:Long)
+POST    /cats/:id              controllers.Application.update(id:Long,cattag: Long)
 
 # Delete a cat
 GET    /cats/:id/delete       controllers.Application.delete(id:Long)

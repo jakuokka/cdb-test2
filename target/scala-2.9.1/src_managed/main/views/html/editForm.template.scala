@@ -13,14 +13,14 @@ import play.api.mvc._
 import play.api.data._
 import views.html._
 /**/
-object editForm extends BaseScalaTemplate[play.api.templates.Html,Format[play.api.templates.Html]](play.api.templates.HtmlFormat) with play.api.templates.Template2[Long,Form[Cat],play.api.templates.Html] {
+object editForm extends BaseScalaTemplate[play.api.templates.Html,Format[play.api.templates.Html]](play.api.templates.HtmlFormat) with play.api.templates.Template3[Long,Long,Form[Cat],play.api.templates.Html] {
 
     /**/
-    def apply/*1.2*/(id: Long,catForm: Form[Cat]):play.api.templates.Html = {
+    def apply/*1.2*/(id: Long,cattag: Long,catForm: Form[Cat]):play.api.templates.Html = {
         _display_ {import helper._
 
 implicit def /*5.2*/implicitFieldConstructor/*5.26*/ = {{ FieldConstructor(twitterBootstrapInput.f) }};
-Seq(format.raw/*1.31*/("""
+Seq(format.raw/*1.44*/("""
 
 """),format.raw/*4.1*/("""
 """),format.raw/*5.75*/("""
@@ -29,7 +29,7 @@ Seq(format.raw/*1.31*/("""
     
     <h1>Edit cat</h1>
     
-    """),_display_(Seq(/*11.6*/form(routes.Application.update(id),'enctype -> "multipart/form-data")/*11.75*/ {_display_(Seq(format.raw/*11.77*/("""
+    """),_display_(Seq(/*11.6*/form(routes.Application.update(id,cattag),'enctype -> "multipart/form-data")/*11.82*/ {_display_(Seq(format.raw/*11.84*/("""
         
         <fieldset>
 
@@ -52,8 +52,8 @@ Seq(format.raw/*1.31*/("""
                 '_showConstraints -> false
             ))),format.raw/*32.14*/("""
 
-        <input type="hidden" name="cattag" value=""""),_display_(Seq(/*34.52*/controllers/*34.63*/.Application.rndInt(1000))),format.raw/*34.88*/("""" />
-          
+        <input type="hidden" name="cattag" value="cattag" />
+   
         </fieldset>
         
         <div class="actions">
@@ -62,30 +62,31 @@ Seq(format.raw/*1.31*/("""
         </div>
 
 	""")))})),format.raw/*43.3*/("""
-	
+
+
      
-   <a href=""""),_display_(Seq(/*46.14*/routes/*46.20*/.Application.delete(id))),format.raw/*46.43*/("""" 
+   <a href=""""),_display_(Seq(/*47.14*/routes/*47.20*/.Application.delete(id))),format.raw/*47.43*/("""" 
    class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete this cat</a>
 	
 	
-""")))})),format.raw/*50.2*/("""
+""")))})),format.raw/*51.2*/("""
 """))}
     }
     
-    def render(id:Long,catForm:Form[Cat]) = apply(id,catForm)
+    def render(id:Long,cattag:Long,catForm:Form[Cat]) = apply(id,cattag,catForm)
     
-    def f:((Long,Form[Cat]) => play.api.templates.Html) = (id,catForm) => apply(id,catForm)
+    def f:((Long,Long,Form[Cat]) => play.api.templates.Html) = (id,cattag,catForm) => apply(id,cattag,catForm)
     
     def ref = this
 
 }
                 /*
                     -- GENERATED --
-                    DATE: Sat Jul 18 23:34:57 EEST 2015
-                    SOURCE: /home/jakuokka/java/play-2.0/test/app/views/editForm.scala.html
-                    HASH: 9f51005dd1c27bd1ca4b4c5410d8305cd4cb6ca3
-                    MATRIX: 516->1|630->51|662->75|736->30|764->49|792->124|824->127|835->131|868->133|936->171|1014->240|1049->242|1124->286|1197->337|1232->342|1452->540|1510->567|1579->614|1624->628|1697->679|1755->706|1979->908|2063->961|2083->972|2130->997|2339->1175|2354->1181|2395->1200|2470->1244|2523->1266|2538->1272|2583->1295|2711->1392
-                    LINES: 19->1|22->5|22->5|23->1|25->4|26->5|28->7|28->7|28->7|32->11|32->11|32->11|37->16|37->16|38->17|43->22|45->24|45->24|46->25|46->25|48->27|53->32|55->34|55->34|55->34|61->40|61->40|61->40|64->43|67->46|67->46|67->46|71->50
+                    DATE: Sun Jul 19 20:49:46 EEST 2015
+                    SOURCE: /home/jakuokka/java/play-2.0/cdb2-tmp6/app/views/editForm.scala.html
+                    HASH: 37b8e47265d2dfc9b2a7efe52119fdf29ca375f8
+                    MATRIX: 521->1|648->64|680->88|754->43|782->62|810->137|842->140|853->144|886->146|954->184|1039->260|1074->262|1149->306|1222->357|1257->362|1477->560|1535->587|1604->634|1649->648|1722->699|1780->726|2004->928|2264->1157|2279->1163|2320->1182|2395->1226|2448->1248|2463->1254|2508->1277|2636->1374
+                    LINES: 19->1|22->5|22->5|23->1|25->4|26->5|28->7|28->7|28->7|32->11|32->11|32->11|37->16|37->16|38->17|43->22|45->24|45->24|46->25|46->25|48->27|53->32|61->40|61->40|61->40|64->43|68->47|68->47|68->47|72->51
                     -- GENERATED --
                 */
             

@@ -1,13 +1,13 @@
-2015-07-18 23:37:20,508 - [INFO] - from play in main 
+2015-07-19 20:41:51,301 - [INFO] - from play in main 
 Listening for HTTP on port 9000...
 
-2015-07-18 23:37:50,334 - [INFO] - from play in play-akka.actor.default-dispatcher-2 
+2015-07-19 20:43:51,263 - [INFO] - from play in play-akka.actor.default-dispatcher-1 
 database [default] connected at jdbc:h2:mem:play
 
-2015-07-18 23:37:50,658 - [ERROR] - from application in New I/O server worker #1-1 
+2015-07-19 20:43:51,587 - [ERROR] - from application in New I/O server worker #1-1 
 
 
-! @6moek9gg2 - Internal server error, for request [GET /] ->
+! @6mol4a98f - Internal server error, for request [GET /] ->
 
 play.api.db.evolutions.InvalidDatabaseRevision: Database 'default' needs evolution! [An SQL script need to be run on your database.]
 	at play.api.db.evolutions.EvolutionsPlugin$$anonfun$onStart$1.apply(Evolutions.scala:424) ~[play_2.9.1.jar:2.0]
@@ -37,7 +37,7 @@ play.api.db.evolutions.InvalidDatabaseRevision: Database 'default' needs evoluti
 	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1495) ~[akka-actor.jar:2.0]
 	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) ~[akka-actor.jar:2.0]
 
-2015-07-18 23:37:55,685 - [WARN] - from play in New I/O server worker #1-1 
+2015-07-19 20:43:56,545 - [WARN] - from play in New I/O server worker #1-1 
 Applying evolution script for database 'default':
 
 # --- Rev:1,Ups - dbd3e9f
@@ -175,18 +175,18 @@ insert into cat (id,name,gender,color,birth,race_id,cattag) values (  9,'Lucifer
 insert into cat (id,name,gender,color,birth,race_id,cattag) values ( 10,'Petkele','Female','Pink','1992-02-02',30,101010);
 
 
-2015-07-18 23:37:58,294 - [INFO] - from play in play-akka.actor.default-dispatcher-2 
+2015-07-19 20:43:58,700 - [INFO] - from play in play-akka.actor.default-dispatcher-1 
 database [default] connected at jdbc:h2:mem:play
 
-2015-07-18 23:37:58,406 - [INFO] - from play in play-akka.actor.default-dispatcher-2 
+2015-07-19 20:43:58,826 - [INFO] - from play in play-akka.actor.default-dispatcher-1 
 Application started (Dev)
 
-2015-07-18 23:38:36,839 - [ERROR] - from application in play-akka.actor.actions-dispatcher-10 
+2015-07-19 20:44:48,087 - [ERROR] - from application in play-akka.actor.actions-dispatcher-9 
 
 
-! @6moek9gg3 - Internal server error, for request [GET /picture/Test?cattag=832109893] ->
+! @6mol4a98g - Internal server error, for request [GET /picture/Joo?cattag=698312836] ->
 
-play.core.ActionInvoker$$anonfun$receive$1$$anon$1: Execution exception [[FileNotFoundException: public/images/Test832109893.jpg (No such file or directory)]]
+play.core.ActionInvoker$$anonfun$receive$1$$anon$1: Execution exception [[FileNotFoundException: public/images/Joo698312836.jpg (No such file or directory)]]
 	at play.core.ActionInvoker$$anonfun$receive$1.apply(Invoker.scala:82) [play_2.9.1.jar:2.0]
 	at play.core.ActionInvoker$$anonfun$receive$1.apply(Invoker.scala:63) [play_2.9.1.jar:2.0]
 	at akka.actor.Actor$class.apply(Actor.scala:290) [akka-actor.jar:2.0]
@@ -199,7 +199,7 @@ play.core.ActionInvoker$$anonfun$receive$1$$anon$1: Execution exception [[FileNo
 	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:997) [akka-actor.jar:2.0]
 	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1495) [akka-actor.jar:2.0]
 	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104) [akka-actor.jar:2.0]
-Caused by: java.io.FileNotFoundException: public/images/Test832109893.jpg (No such file or directory)
+Caused by: java.io.FileNotFoundException: public/images/Joo698312836.jpg (No such file or directory)
 	at java.io.FileInputStream.open(Native Method) ~[na:1.7.0_60]
 	at java.io.FileInputStream.<init>(FileInputStream.java:146) ~[na:1.7.0_60]
 	at play.api.libs.iteratee.Enumerator$.fromFile(Iteratee.scala:981) ~[play_2.9.1.jar:2.0]
