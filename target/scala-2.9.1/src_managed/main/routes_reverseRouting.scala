@@ -1,6 +1,6 @@
 // @SOURCE:/home/jakuokka/java/play-2.0/cdb2-tmp6/conf/routes
-// @HASH:aa40ecead0cd714cb584b176707405062146f723
-// @DATE:Sun Jul 19 20:42:01 EEST 2015
+// @HASH:4c76bf823c71568eb21290ce59c98d302a1a1033
+// @DATE:Mon Jul 20 00:07:14 EEST 2015
 
 import play.core._
 import play.core.Router._
@@ -48,8 +48,8 @@ def pickPict(name:String, cattag:Long) = {
                                                         
  
 // @LINE:17
-def update(id:Long, cattag:Long) = {
-   Call("POST", "/cats/" + implicitly[PathBindable[Long]].unbind("id", id) + queryString(List(Some(implicitly[QueryStringBindable[Long]].unbind("cattag", cattag)))))
+def update(id:Long, curname:String, cattag:Long) = {
+   Call("POST", "/cats/" + implicitly[PathBindable[Long]].unbind("id", id) + queryString(List(Some(implicitly[QueryStringBindable[String]].unbind("curname", curname)), Some(implicitly[QueryStringBindable[Long]].unbind("cattag", cattag)))))
 }
                                                         
  
@@ -181,8 +181,8 @@ def pickPict = JavascriptReverseRoute(
 def update = JavascriptReverseRoute(
    "controllers.Application.update",
    """
-      function(id,cattag) {
-      return _wA({method:"POST", url:"/cats/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("id", id) + _qS([(""" + implicitly[QueryStringBindable[Long]].javascriptUnbind + """)("cattag", cattag)])})
+      function(id,curname,cattag) {
+      return _wA({method:"POST", url:"/cats/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("id", id) + _qS([(""" + implicitly[QueryStringBindable[String]].javascriptUnbind + """)("curname", curname), (""" + implicitly[QueryStringBindable[Long]].javascriptUnbind + """)("cattag", cattag)])})
       }
    """
 )
@@ -344,8 +344,8 @@ def pickPict(name:String, cattag:Long) = new play.api.mvc.HandlerRef(
                               
  
 // @LINE:17
-def update(id:Long, cattag:Long) = new play.api.mvc.HandlerRef(
-   controllers.Application.update(id, cattag), HandlerDef(this, "controllers.Application", "update", Seq(classOf[Long], classOf[Long]))
+def update(id:Long, curname:String, cattag:Long) = new play.api.mvc.HandlerRef(
+   controllers.Application.update(id, curname, cattag), HandlerDef(this, "controllers.Application", "update", Seq(classOf[Long], classOf[String], classOf[Long]))
 )
                               
  

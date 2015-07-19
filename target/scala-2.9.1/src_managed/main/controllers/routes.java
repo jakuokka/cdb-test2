@@ -1,6 +1,6 @@
 // @SOURCE:/home/jakuokka/java/play-2.0/cdb2-tmp6/conf/routes
-// @HASH:aa40ecead0cd714cb584b176707405062146f723
-// @DATE:Sun Jul 19 20:42:01 EEST 2015
+// @HASH:4c76bf823c71568eb21290ce59c98d302a1a1033
+// @DATE:Mon Jul 20 00:07:14 EEST 2015
 
 package controllers;
 

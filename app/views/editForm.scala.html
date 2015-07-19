@@ -1,4 +1,4 @@
-@(id: Long,cattag: Long,catForm: Form[Cat])
+@(id: Long, curname: String, cattag: Long,catForm: Form[Cat])
 
 @import helper._
 
@@ -8,7 +8,7 @@
     
     <h1>Edit cat</h1>
     
-    @form(routes.Application.update(id,cattag),'enctype -> "multipart/form-data") {
+    @form(routes.Application.update(id,curname,cattag),'enctype -> "multipart/form-data") {
         
         <fieldset>
 

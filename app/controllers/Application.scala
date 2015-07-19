@@ -74,6 +74,14 @@ def path = "public/images/" + name + cattag + ".jpg"
 Ok.sendFile(new java.io.File(path))
 }
 
+/* Rename a picture in public/images (update): oldname + tag => newname + tag */
+
+def pickPictrename(oldname: String,newname: String, cattag: Long) {
+val file: File = new File("public/images/" + oldname + cattag + ".jpg")
+file.renameTo(new File("public/images/" + newname + cattag + ".jpg"))
+}
+
+
 /* Delete a picture from public/images */
 
 def deletePict(name: String,cattag: Long){
@@ -108,7 +116,7 @@ file.delete()
    */
   def edit(id: Long) = Action {
     Cat.findById(id).map { cat =>
-    Ok(html.editForm(id,cat.cattag.get,catForm.fill(cat)))
+    Ok(html.editForm(id,cat.name,cat.cattag.get,catForm.fill(cat)))
     }.getOrElse(NotFound)
   }
   
@@ -117,13 +125,14 @@ file.delete()
    *
    * @param id Id of the cat to edit
    */
-  def update(id: Long,cattag: Long) = Action { implicit request =>
+  def update(id: Long,curname: String, cattag: Long) = Action { implicit request =>
       catForm.bindFromRequest.fold(
       formWithErrors =>
-      BadRequest(html.editForm(id,cattag,formWithErrors)),
+      BadRequest(html.editForm(id,curname,cattag,formWithErrors)),
         cat => {
+	pickPictrename(curname,cat.name,cattag)
         Cat.update(id, cat)
-
+   
         Home.flashing("success" -> "Cat %s has been updated".format(cat.name))
       }
     )

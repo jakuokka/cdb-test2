@@ -14,7 +14,7 @@ POST    /cats                  controllers.Application.save
 
 # Edit existing cat
 GET     /cats/:id              controllers.Application.edit(id:Long)
-POST    /cats/:id              controllers.Application.update(id:Long,cattag: Long)
+POST    /cats/:id              controllers.Application.update(id:Long,curname: String,cattag: Long)
 
 # Delete a cat
 GET    /cats/:id/delete       controllers.Application.delete(id:Long)
@@ -29,5 +29,6 @@ POST     /assets/*file              controllers.Assets.at(path="/public", file)
 #Get Pic
 POST /        controllers.Application.upload(name: String,cattag: Long)
 GET /picture/:name   controllers.Application.pickPict(name: String,cattag : Long)
+
 
 

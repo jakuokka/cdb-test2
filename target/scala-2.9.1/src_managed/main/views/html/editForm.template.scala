@@ -13,14 +13,14 @@ import play.api.mvc._
 import play.api.data._
 import views.html._
 /**/
-object editForm extends BaseScalaTemplate[play.api.templates.Html,Format[play.api.templates.Html]](play.api.templates.HtmlFormat) with play.api.templates.Template3[Long,Long,Form[Cat],play.api.templates.Html] {
+object editForm extends BaseScalaTemplate[play.api.templates.Html,Format[play.api.templates.Html]](play.api.templates.HtmlFormat) with play.api.templates.Template4[Long,String,Long,Form[Cat],play.api.templates.Html] {
 
     /**/
-    def apply/*1.2*/(id: Long,cattag: Long,catForm: Form[Cat]):play.api.templates.Html = {
+    def apply/*1.2*/(id: Long, curname: String, cattag: Long,catForm: Form[Cat]):play.api.templates.Html = {
         _display_ {import helper._
 
 implicit def /*5.2*/implicitFieldConstructor/*5.26*/ = {{ FieldConstructor(twitterBootstrapInput.f) }};
-Seq(format.raw/*1.44*/("""
+Seq(format.raw/*1.62*/("""
 
 """),format.raw/*4.1*/("""
 """),format.raw/*5.75*/("""
@@ -29,7 +29,7 @@ Seq(format.raw/*1.44*/("""
     
     <h1>Edit cat</h1>
     
-    """),_display_(Seq(/*11.6*/form(routes.Application.update(id,cattag),'enctype -> "multipart/form-data")/*11.82*/ {_display_(Seq(format.raw/*11.84*/("""
+    """),_display_(Seq(/*11.6*/form(routes.Application.update(id,curname,cattag),'enctype -> "multipart/form-data")/*11.90*/ {_display_(Seq(format.raw/*11.92*/("""
         
         <fieldset>
 
@@ -73,19 +73,19 @@ Seq(format.raw/*1.44*/("""
 """))}
     }
     
-    def render(id:Long,cattag:Long,catForm:Form[Cat]) = apply(id,cattag,catForm)
+    def render(id:Long,curname:String,cattag:Long,catForm:Form[Cat]) = apply(id,curname,cattag,catForm)
     
-    def f:((Long,Long,Form[Cat]) => play.api.templates.Html) = (id,cattag,catForm) => apply(id,cattag,catForm)
+    def f:((Long,String,Long,Form[Cat]) => play.api.templates.Html) = (id,curname,cattag,catForm) => apply(id,curname,cattag,catForm)
     
     def ref = this
 
 }
                 /*
                     -- GENERATED --
-                    DATE: Sun Jul 19 20:49:46 EEST 2015
+                    DATE: Mon Jul 20 00:07:16 EEST 2015
                     SOURCE: /home/jakuokka/java/play-2.0/cdb2-tmp6/app/views/editForm.scala.html
-                    HASH: 37b8e47265d2dfc9b2a7efe52119fdf29ca375f8
-                    MATRIX: 521->1|648->64|680->88|754->43|782->62|810->137|842->140|853->144|886->146|954->184|1039->260|1074->262|1149->306|1222->357|1257->362|1477->560|1535->587|1604->634|1649->648|1722->699|1780->726|2004->928|2264->1157|2279->1163|2320->1182|2395->1226|2448->1248|2463->1254|2508->1277|2636->1374
+                    HASH: 4e81ab128e9f959aa595a9fb30b870cfc4895974
+                    MATRIX: 528->1|673->82|705->106|779->61|807->80|835->155|867->158|878->162|911->164|979->202|1072->286|1107->288|1182->332|1255->383|1290->388|1510->586|1568->613|1637->660|1682->674|1755->725|1813->752|2037->954|2297->1183|2312->1189|2353->1208|2428->1252|2481->1274|2496->1280|2541->1303|2669->1400
                     LINES: 19->1|22->5|22->5|23->1|25->4|26->5|28->7|28->7|28->7|32->11|32->11|32->11|37->16|37->16|38->17|43->22|45->24|45->24|46->25|46->25|48->27|53->32|61->40|61->40|61->40|64->43|68->47|68->47|68->47|72->51
                     -- GENERATED --
                 */
