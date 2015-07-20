@@ -1,6 +1,6 @@
-// @SOURCE:/home/jakuokka/java/play-2.0/cdb2-tmp6/conf/routes
+// @SOURCE:/home/jakuokka/java/play-2.0/cdb-test2/conf/routes
 // @HASH:4c76bf823c71568eb21290ce59c98d302a1a1033
-// @DATE:Mon Jul 20 00:07:14 EEST 2015
+// @DATE:Mon Jul 20 12:53:22 EEST 2015
 
 import play.core._
 import play.core.Router._

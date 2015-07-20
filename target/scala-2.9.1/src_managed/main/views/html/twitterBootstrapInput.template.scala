@@ -41,8 +41,8 @@ Seq(format.raw/*1.34*/("""
 }
                 /*
                     -- GENERATED --
-                    DATE: Mon Jul 20 00:07:16 EEST 2015
-                    SOURCE: /home/jakuokka/java/play-2.0/cdb2-tmp6/app/views/twitterBootstrapInput.scala.html
+                    DATE: Mon Jul 20 12:53:24 EEST 2015
+                    SOURCE: /home/jakuokka/java/play-2.0/cdb-test2/app/views/twitterBootstrapInput.scala.html
                     HASH: 69ac1da3a5c9505436ae5a8eb5dc1c480cf7a34a
                     MATRIX: 535->1|639->33|668->190|721->213|751->235|785->237|822->243|872->263|888->271|912->274|945->277|961->285|988->291|1060->333|1076->341|1103->347|1170->383|1187->391|1230->412
                     LINES: 19->1|22->1|24->5|25->6|25->6|25->6|25->6|26->7|26->7|26->7|26->7|26->7|26->7|28->9|28->9|28->9|29->10|29->10|29->10
