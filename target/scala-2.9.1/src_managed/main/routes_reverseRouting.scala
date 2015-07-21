@@ -1,6 +1,6 @@
 // @SOURCE:/home/jakuokka/java/play-2.0/cdb-test2/conf/routes
-// @HASH:4c76bf823c71568eb21290ce59c98d302a1a1033
-// @DATE:Mon Jul 20 12:53:22 EEST 2015
+// @HASH:971225e5675a9be029e8f242d335cebdc542da78
+// @DATE:Tue Jul 21 11:02:02 EEST 2015
 
 import play.core._
 import play.core.Router._
@@ -12,6 +12,7 @@ import play.api.mvc._
 import Router.queryString
 
 
+// @LINE:32
 // @LINE:31
 // @LINE:30
 // @LINE:27
@@ -26,6 +27,7 @@ import Router.queryString
 // @LINE:6
 package controllers {
 
+// @LINE:32
 // @LINE:31
 // @LINE:30
 // @LINE:21
@@ -41,9 +43,9 @@ class ReverseApplication {
 
 
  
-// @LINE:31
+// @LINE:32
 def pickPict(name:String, cattag:Long) = {
-   Call("GET", "/picture/" + implicitly[PathBindable[String]].unbind("name", name) + queryString(List(Some(implicitly[QueryStringBindable[Long]].unbind("cattag", cattag)))))
+   Call("GET", "/picture" + queryString(List(Some(implicitly[QueryStringBindable[String]].unbind("name", name)), Some(implicitly[QueryStringBindable[Long]].unbind("cattag", cattag)))))
 }
                                                         
  
@@ -76,6 +78,12 @@ case (id) if true => Call("POST", "/cats/" + implicitly[PathBindable[Long]].unbi
 // @LINE:12
 def create() = {
    Call("GET", "/cats/new")
+}
+                                                        
+ 
+// @LINE:31
+def deletePictreturn(id:Long) = {
+   Call("GET", "/picture/" + implicitly[PathBindable[Long]].unbind("id", id))
 }
                                                         
  
@@ -137,6 +145,7 @@ case (file) if true => Call("POST", "/assets/" + implicitly[PathBindable[String]
                     
 
 
+// @LINE:32
 // @LINE:31
 // @LINE:30
 // @LINE:27
@@ -151,6 +160,7 @@ case (file) if true => Call("POST", "/assets/" + implicitly[PathBindable[String]
 // @LINE:6
 package controllers.javascript {
 
+// @LINE:32
 // @LINE:31
 // @LINE:30
 // @LINE:21
@@ -166,12 +176,12 @@ class ReverseApplication {
 
 
  
-// @LINE:31
+// @LINE:32
 def pickPict = JavascriptReverseRoute(
    "controllers.Application.pickPict",
    """
       function(name,cattag) {
-      return _wA({method:"GET", url:"/picture/" + (""" + implicitly[PathBindable[String]].javascriptUnbind + """)("name", name) + _qS([(""" + implicitly[QueryStringBindable[Long]].javascriptUnbind + """)("cattag", cattag)])})
+      return _wA({method:"GET", url:"/picture" + _qS([(""" + implicitly[QueryStringBindable[String]].javascriptUnbind + """)("name", name), (""" + implicitly[QueryStringBindable[Long]].javascriptUnbind + """)("cattag", cattag)])})
       }
    """
 )
@@ -222,6 +232,17 @@ def create = JavascriptReverseRoute(
    """
       function() {
       return _wA({method:"GET", url:"/cats/new"})
+      }
+   """
+)
+                                                        
+ 
+// @LINE:31
+def deletePictreturn = JavascriptReverseRoute(
+   "controllers.Application.deletePictreturn",
+   """
+      function(id) {
+      return _wA({method:"GET", url:"/picture/" + (""" + implicitly[PathBindable[Long]].javascriptUnbind + """)("id", id)})
       }
    """
 )
@@ -308,6 +329,7 @@ def at = JavascriptReverseRoute(
                     
 
 
+// @LINE:32
 // @LINE:31
 // @LINE:30
 // @LINE:27
@@ -322,6 +344,7 @@ def at = JavascriptReverseRoute(
 // @LINE:6
 package controllers.ref {
 
+// @LINE:32
 // @LINE:31
 // @LINE:30
 // @LINE:21
@@ -337,7 +360,7 @@ class ReverseApplication {
 
 
  
-// @LINE:31
+// @LINE:32
 def pickPict(name:String, cattag:Long) = new play.api.mvc.HandlerRef(
    controllers.Application.pickPict(name, cattag), HandlerDef(this, "controllers.Application", "pickPict", Seq(classOf[String], classOf[Long]))
 )
@@ -364,6 +387,12 @@ def delete(id:Long) = new play.api.mvc.HandlerRef(
 // @LINE:12
 def create() = new play.api.mvc.HandlerRef(
    controllers.Application.create(), HandlerDef(this, "controllers.Application", "create", Seq())
+)
+                              
+ 
+// @LINE:31
+def deletePictreturn(id:Long) = new play.api.mvc.HandlerRef(
+   controllers.Application.deletePictreturn(id), HandlerDef(this, "controllers.Application", "deletePictreturn", Seq(classOf[Long]))
 )
                               
  

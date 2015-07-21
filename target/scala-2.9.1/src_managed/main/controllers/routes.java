@@ -1,6 +1,6 @@
 // @SOURCE:/home/jakuokka/java/play-2.0/cdb-test2/conf/routes
-// @HASH:4c76bf823c71568eb21290ce59c98d302a1a1033
-// @DATE:Mon Jul 20 12:53:22 EEST 2015
+// @HASH:971225e5675a9be029e8f242d335cebdc542da78
+// @DATE:Tue Jul 21 11:02:02 EEST 2015
 
 package controllers;
 

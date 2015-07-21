@@ -1,6 +1,6 @@
 // @SOURCE:/home/jakuokka/java/play-2.0/cdb-test2/conf/routes
-// @HASH:4c76bf823c71568eb21290ce59c98d302a1a1033
-// @DATE:Mon Jul 20 12:53:22 EEST 2015
+// @HASH:971225e5675a9be029e8f242d335cebdc542da78
+// @DATE:Tue Jul 21 11:02:02 EEST 2015
 
 import play.core._
 import play.core.Router._
@@ -59,9 +59,13 @@ val controllers_Application_upload10 = Route("POST", PathPattern(List(StaticPart
                     
 
 // @LINE:31
-val controllers_Application_pickPict11 = Route("GET", PathPattern(List(StaticPart("/picture/"),DynamicPart("name", """[^/]+"""))))
+val controllers_Application_deletePictreturn11 = Route("GET", PathPattern(List(StaticPart("/picture/"),DynamicPart("id", """[^/]+"""))))
                     
-def documentation = List(("""GET""","""/""","""controllers.Application.index"""),("""GET""","""/cats""","""controllers.Application.list(p:Int ?= 0, s:Int ?= 2, f:String ?= "")"""),("""GET""","""/cats/new""","""controllers.Application.create"""),("""POST""","""/cats""","""controllers.Application.save"""),("""GET""","""/cats/$id<[^/]+>""","""controllers.Application.edit(id:Long)"""),("""POST""","""/cats/$id<[^/]+>""","""controllers.Application.update(id:Long, curname:String, cattag:Long)"""),("""GET""","""/cats/$id<[^/]+>/delete""","""controllers.Application.delete(id:Long)"""),("""POST""","""/cats/$id<[^/]+>/delete""","""controllers.Application.delete(id:Long)"""),("""GET""","""/assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""POST""","""/assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""POST""","""/""","""controllers.Application.upload(name:String, cattag:Long)"""),("""GET""","""/picture/$name<[^/]+>""","""controllers.Application.pickPict(name:String, cattag:Long)"""))
+
+// @LINE:32
+val controllers_Application_pickPict12 = Route("GET", PathPattern(List(StaticPart("/picture"))))
+                    
+def documentation = List(("""GET""","""/""","""controllers.Application.index"""),("""GET""","""/cats""","""controllers.Application.list(p:Int ?= 0, s:Int ?= 2, f:String ?= "")"""),("""GET""","""/cats/new""","""controllers.Application.create"""),("""POST""","""/cats""","""controllers.Application.save"""),("""GET""","""/cats/$id<[^/]+>""","""controllers.Application.edit(id:Long)"""),("""POST""","""/cats/$id<[^/]+>""","""controllers.Application.update(id:Long, curname:String, cattag:Long)"""),("""GET""","""/cats/$id<[^/]+>/delete""","""controllers.Application.delete(id:Long)"""),("""POST""","""/cats/$id<[^/]+>/delete""","""controllers.Application.delete(id:Long)"""),("""GET""","""/assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""POST""","""/assets/$file<.+>""","""controllers.Assets.at(path:String = "/public", file:String)"""),("""POST""","""/""","""controllers.Application.upload(name:String, cattag:Long)"""),("""GET""","""/picture/$id<[^/]+>""","""controllers.Application.deletePictreturn(id:Long)"""),("""GET""","""/picture""","""controllers.Application.pickPict(name:String, cattag:Long)"""))
              
     
 def routes:PartialFunction[RequestHeader,Handler] = {        
@@ -155,8 +159,16 @@ case controllers_Application_upload10(params) => {
                     
 
 // @LINE:31
-case controllers_Application_pickPict11(params) => {
-   call(params.fromPath[String]("name", None), params.fromQuery[Long]("cattag", None)) { (name, cattag) =>
+case controllers_Application_deletePictreturn11(params) => {
+   call(params.fromPath[Long]("id", None)) { (id) =>
+        invokeHandler(_root_.controllers.Application.deletePictreturn(id), HandlerDef(this, "controllers.Application", "deletePictreturn", Seq(classOf[Long])))
+   }
+}
+                    
+
+// @LINE:32
+case controllers_Application_pickPict12(params) => {
+   call(params.fromQuery[String]("name", None), params.fromQuery[Long]("cattag", None)) { (name, cattag) =>
         invokeHandler(_root_.controllers.Application.pickPict(name, cattag), HandlerDef(this, "controllers.Application", "pickPict", Seq(classOf[String], classOf[Long])))
    }
 }

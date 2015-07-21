@@ -76,19 +76,17 @@
                           <td>
                                @race.map(_.name).getOrElse { <em>-</em> }
                           </td>
-			   <td>
-
-			  <img src="@routes.Application.pickPict(cat.name,cat.cattag.get)" width="60" height="45">
+			  <td>
+			       <img src="@routes.Application.pickPict(cat.name,cat.cattag.get)" width="90" height="67.5">
+			  </td>
  			  <td> @form(routes.Application.upload(cat.name,cat.cattag.get), 'enctype -> "multipart/form-data") {
-    
-			  <input type="file" name="picture">   <input type="submit" value="Attach this picture"> 
-			   
-    
-			    }
-                         </td>
-			 
-			 </td>
-		         </tr>
+    			       <input type="file" name="picture">   <input type="submit" value="Attach this picture"> 
+    			  }
+			  @form(routes.Application.deletePictreturn(cat.id.get),'enctype -> "multipart/form-data") {
+                          <input type="submit" value="Remove">
+			  }
+                          </td>
+		        </tr>
                     }
                 }
  

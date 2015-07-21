@@ -1,9 +1,9 @@
-2015-07-20 12:53:09,376 - [INFO] - from play in main 
+2015-07-21 11:07:23,438 - [INFO] - from play in main 
 Listening for HTTP on port 9000...
 
-2015-07-20 12:54:36,823 - [INFO] - from play in play-akka.actor.default-dispatcher-3 
+2015-07-21 11:08:26,307 - [INFO] - from play in play-akka.actor.default-dispatcher-2 
 database [default] connected at jdbc:h2:mem:play
 
-2015-07-20 12:54:37,863 - [INFO] - from play in play-akka.actor.default-dispatcher-3 
+2015-07-21 11:08:27,201 - [INFO] - from play in play-akka.actor.default-dispatcher-2 
 Application started (Dev)
 

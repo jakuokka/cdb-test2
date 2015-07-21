@@ -56,7 +56,7 @@ Seq(format.raw/*1.17*/("""
 }
                 /*
                     -- GENERATED --
-                    DATE: Mon Jul 20 12:53:24 EEST 2015
+                    DATE: Tue Jul 21 11:02:04 EEST 2015
                     SOURCE: /home/jakuokka/java/play-2.0/cdb-test2/app/views/main.scala.html
                     HASH: 0191a2f0f522d3b5918086a2b779e016c8f1df27
                     MATRIX: 502->1|589->16|761->158|775->164|840->207|943->280|957->286|1013->320|1168->444|1183->450|1225->470|1446->660|1475->667

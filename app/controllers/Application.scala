@@ -169,6 +169,18 @@ file.delete()
    Home.flashing("success" -> "Cat has been deleted")
    }
 
+ /**
+   * Cat picture removal and => Home.
+   */
+   def deletePictreturn(id: Long) = Action {
+   Cat.findById(id).map { cat =>
+   deletePict(cat.name,cat.cattag.get)
+   }.getOrElse(NotFound)
+   Home.flashing("success" -> "Removed")
+   }
+
+
+
  
   def rndInt(n: Int): Long = {
   val tagPict: Long  = Random.nextInt(n*1000000)

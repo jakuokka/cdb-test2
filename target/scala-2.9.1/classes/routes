@@ -27,8 +27,9 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 POST     /assets/*file              controllers.Assets.at(path="/public", file)
 
 #Get Pic
-POST /        controllers.Application.upload(name: String,cattag: Long)
-GET /picture/:name   controllers.Application.pickPict(name: String,cattag : Long)
+POST /             controllers.Application.upload(name: String,cattag: Long)
+GET /picture/:id   controllers.Application.deletePictreturn(id: Long)
+GET /picture       controllers.Application.pickPict(name: String, cattag: Long)
 
 
 
